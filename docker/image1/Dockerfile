@@ -18,4 +18,4 @@ USER $USER
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
-ENV PATH="/home/user/.local/bin:$PATH"
+ENV PATH="/home/${USER}/.local/bin:$PATH"

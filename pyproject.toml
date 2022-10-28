@@ -11,7 +11,6 @@ Django = "^4.1.2"
 boto3 = "^1.24.96"
 boto3-stubs = {extras = ["ecr", "s3", "secretsmanager"], version = "^1.24.96"}
 cryptography = "^38.0.1"
-Django = "^4.1"
 django-cors-headers = "^3.12.0"
 django-filter = "^22.1"
 django-leaflet = "^0.28.3"

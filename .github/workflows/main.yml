@@ -48,5 +48,5 @@ jobs:
           path: .tester
           key: ${{ steps.tag.outputs.latest }}
       - run: |
-          mkdir .tester
+          mkdir -p .tester
           docker-compose run --volume ${GITHUB_WORKSPACE}/.tester:/opt/app --workdir /opt/app image1 /root/.local/bin/poetry config --list

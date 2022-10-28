@@ -49,5 +49,4 @@ jobs:
           key: ${{ steps.tag.outputs.latest }}
       - run: |
           mkdir -p .tester/{pypoetry}
-          docker-compose run --rm --volume ${GITHUB_WORKSPACE}/.tester/pypoetry:/root/.cache/pypoetry --workdir /opt/app image1 /root/.local/bin/poetry init --name test --description desc --author me --python 3.9 --dependency django
           docker-compose run --rm --volume ${GITHUB_WORKSPACE}/.tester/pypoetry:/root/.cache/pypoetry --workdir /opt/app image1 /root/.local/bin/poetry install

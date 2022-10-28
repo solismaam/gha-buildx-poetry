@@ -57,6 +57,6 @@ jobs:
           key: ${{ steps.tag.outputs.latest }}-${{ hashFiles('pyproject.toml') }}
       - run: |
           mkdir -p .tester
-          docker-compose run --rm --volume ${PWD}:/home/user/app --volume ${GITHUB_WORKSPACE}/.tester:/home/user/.cache --workdir /home/user/app image1 poetry install
-          docker-compose run --rm --volume ${PWD}:/home/user/app --volume ${GITHUB_WORKSPACE}/.tester:/home/user/.cache --workdir /home/user/app image1 poetry update
-          docker-compose run --rm --volume ${PWD}:/home/user/app --volume ${GITHUB_WORKSPACE}/.tester:/home/user/.cache --workdir /home/user/app image1 poetry install
+          docker-compose run --rm --volume ${PWD}:/home/${{ steps.user.outputs.name }}/app --volume ${GITHUB_WORKSPACE}/.tester:/home/${{ steps.user.outputs.name }}/.cache --workdir /home/${{ steps.user.outputs.name }}/app image1 poetry install
+          docker-compose run --rm --volume ${PWD}:/home/${{ steps.user.outputs.name }}/app --volume ${GITHUB_WORKSPACE}/.tester:/home/${{ steps.user.outputs.name }}/.cache --workdir /home/${{ steps.user.outputs.name }}/app image1 poetry update
+          docker-compose run --rm --volume ${PWD}:/home/${{ steps.user.outputs.name }}/app --volume ${GITHUB_WORKSPACE}/.tester:/home/${{ steps.user.outputs.name }}/.cache --workdir /home/${{ steps.user.outputs.name }}/app image1 poetry install

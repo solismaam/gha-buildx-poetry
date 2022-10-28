@@ -44,7 +44,9 @@ jobs:
         id: cached-poetry-and-venv
         uses: actions/cache@v3
         with:
-          path: |
-            .tester_poetry_venv
-            .tester_poetry_cache
+          path: .tester
           key: ${{ steps.tag.outputs.latest }}
+      - run: |
+          mkdir .tester
+          docker-compose up image2
+          docker-compose run --volume .tester:/opt/app --workdir /opt/app poetry config

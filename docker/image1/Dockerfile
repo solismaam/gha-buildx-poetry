@@ -19,3 +19,5 @@ USER $USER
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
 ENV PATH="/home/${USER}/.local/bin:$PATH"
+
+RUN poetry config virtualenvs.in-project true

@@ -4,7 +4,9 @@ services:
     build:
       context: .
       dockerfile: docker/image1/Dockerfile
+    image: ${IMAGE_1_REPOSITORY:-image1}:${IMAGE_TAG:-local}
   image2:
     build:
       context: .
       dockerfile: docker/image2/Dockerfile
+    image: ${IMAGE_2_REPOSITORY:-image2}:${IMAGE_TAG:-local}

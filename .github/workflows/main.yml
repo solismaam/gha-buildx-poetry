@@ -1,6 +1,7 @@
 on: [push]
 
 env:
+  IMAGE_TAG: tester
   IMAGE_1_REPOSITORY: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/image1
   IMAGE_2_REPOSITORY: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/image2
 
@@ -29,11 +30,11 @@ jobs:
             image1.cache-from=ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry
             image1.cache-to=mode=max,ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry
             image1.pull=true
-            image1.tags=${{ env.IMAGE_1_REPOSITORY }}:tester
+            image1.tags=${{ env.IMAGE_1_REPOSITORY }}:${{ env.IMAGE_TAG }}
             image2.cache-from=ref=${{ env.IMAGE_2_REPOSITORY }}:cache,type=registry
             image2.cache-to=mode=max,ref=${{ env.IMAGE_2_REPOSITORY }}:cache,type=registry
             image2.pull=true
-            image2.tags=${{ env.IMAGE_2_REPOSITORY }}:tester
+            image2.tags=${{ env.IMAGE_2_REPOSITORY }}:${{ env.IMAGE_TAG }}
           targets: image1,image2
       - run: |
           docker images

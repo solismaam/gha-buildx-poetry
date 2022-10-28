@@ -37,3 +37,14 @@ jobs:
           targets: image1,image2
       - run: |
           docker images
+      - id: tag
+        run: |
+          echo latest="$(git describe --tags --abbrev=0 || echo HEAD)" >> $GITHUB_OUTPUT
+      - name: Load cached poetry and venv
+        id: cached-poetry-and-venv
+        uses: actions/cache@v3
+        with:
+          path: |
+            .tester_poetry_venv
+            .tester_poetry_cache
+          key: ${{ steps.tag.outputs.latest }}

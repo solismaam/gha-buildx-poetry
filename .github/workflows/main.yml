@@ -24,7 +24,6 @@ jobs:
         with:
           files: docker-compose.yml
           load: true
-          push: true
           set: |
             *.platform=linux/amd64
             image1.cache-from=ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry

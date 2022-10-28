@@ -48,5 +48,4 @@ jobs:
           key: ${{ steps.tag.outputs.latest }}
       - run: |
           mkdir .tester
-          docker-compose up image2
-          docker-compose run --volume .tester:/opt/app --workdir /opt/app poetry config
+          docker-compose run --volume .tester:/opt/app --workdir /opt/app image1 poetry config

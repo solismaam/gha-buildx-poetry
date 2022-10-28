@@ -35,3 +35,5 @@ jobs:
             image2.pull=true
             image2.tags=${{ env.IMAGE_2_REPOSITORY }}:tester
           targets: image1,image2
+      - run: |
+          docker images

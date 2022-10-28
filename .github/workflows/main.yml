@@ -52,4 +52,3 @@ jobs:
           docker-compose run --rm --volume ${PWD}:/opt/app --volume ${GITHUB_WORKSPACE}/.tester:/root/.cache --workdir /opt/app image1 /root/.local/bin/poetry install
           docker-compose run --rm --volume ${PWD}:/opt/app --volume ${GITHUB_WORKSPACE}/.tester:/root/.cache --workdir /opt/app image1 /root/.local/bin/poetry update
           docker-compose run --rm --volume ${PWD}:/opt/app --volume ${GITHUB_WORKSPACE}/.tester:/root/.cache --workdir /opt/app image1 /root/.local/bin/poetry install
-          find .tester

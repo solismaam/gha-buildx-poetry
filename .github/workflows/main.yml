@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
+      - id: user
+        run: |
+          echo name=$(whoami) >> $GITHUB_OUTPUT
+          echo gid=$(id -g) >> $GITHUB_OUTPUT
+          echo uid=$(id -u) >> $GITHUB_OUTPUT
       - name: Checkout
         uses: actions/checkout@v3.1.0
       - name: Login to GitHub Container Registry
@@ -27,6 +32,9 @@ jobs:
           load: true
           set: |
             *.platform=linux/amd64
+            image1.args.USER=${{ steps.user.outputs.name }}
+            image1.args.USER_GID=${{ steps.user.outputs.gid }}
+            image1.args.USER_UID=${{ steps.user.outputs.uid }}
             image1.cache-from=ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry
             image1.cache-to=mode=max,ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry
             image1.pull=true
@@ -49,6 +57,6 @@ jobs:
           key: ${{ steps.tag.outputs.latest }}-${{ hashFiles('pyproject.toml') }}
       - run: |
           mkdir -p .tester
-          docker-compose run --rm --volume ${PWD}:/opt/app --volume ${GITHUB_WORKSPACE}/.tester:/root/.cache --workdir /opt/app image1 /root/.local/bin/poetry install
-          docker-compose run --rm --volume ${PWD}:/opt/app --volume ${GITHUB_WORKSPACE}/.tester:/root/.cache --workdir /opt/app image1 /root/.local/bin/poetry update
-          docker-compose run --rm --volume ${PWD}:/opt/app --volume ${GITHUB_WORKSPACE}/.tester:/root/.cache --workdir /opt/app image1 /root/.local/bin/poetry install
+          docker-compose run --rm --volume ${PWD}:/home/user/app --volume ${GITHUB_WORKSPACE}/.tester:/home/user/.cache --workdir /home/user/app image1 poetry install
+          docker-compose run --rm --volume ${PWD}:/home/user/app --volume ${GITHUB_WORKSPACE}/.tester:/home/user/.cache --workdir /home/user/app image1 poetry update
+          docker-compose run --rm --volume ${PWD}:/home/user/app --volume ${GITHUB_WORKSPACE}/.tester:/home/user/.cache --workdir /home/user/app image1 poetry install

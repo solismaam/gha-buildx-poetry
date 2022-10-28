@@ -7,4 +7,15 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
+ARG USER=user
+ARG USER_UID=1000
+ARG USER_GID=1000
+
+RUN addgroup --gid ${USER_GID} ${USER}
+RUN adduser --disabled-password --gecos "" --gid ${USER_GID} --shell /bin/bash --uid ${USER_UID} $USER
+
+USER $USER
+
 RUN curl -sSL https://install.python-poetry.org | python3 -
+
+ENV PATH="/home/user/.local/bin:$PATH"

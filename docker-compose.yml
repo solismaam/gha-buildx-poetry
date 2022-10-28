@@ -7,4 +7,4 @@ services:
   image2:
     build:
       context: .
-      dockerfile: docker/image1/Dockerfile
+      dockerfile: docker/image2/Dockerfile

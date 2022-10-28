@@ -10,4 +10,4 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 COPY docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]

@@ -53,8 +53,7 @@ jobs:
         id: cached-poetry-and-venv
         uses: actions/cache@v3
         with:
-          path: .tester
+          path: .venv
           key: ${{ steps.tag.outputs.latest }}-${{ hashFiles('pyproject.toml') }}
       - run: |
-          mkdir -p .tester
-          docker-compose run --rm --volume ${PWD}:/home/${{ steps.user.outputs.name }}/app --volume ${GITHUB_WORKSPACE}/.tester:/home/${{ steps.user.outputs.name }}/.cache --workdir /home/${{ steps.user.outputs.name }}/app image1 poetry install
+          docker-compose run --rm --volume ${PWD}:/home/${{ steps.user.outputs.name }}/app  --workdir /home/${{ steps.user.outputs.name }}/app image1 poetry install

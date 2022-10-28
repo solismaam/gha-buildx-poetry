@@ -1,16 +1,37 @@
 on: [push]
 
+env:
+  IMAGE_1_REPOSITORY: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/image1
+  IMAGE_2_REPOSITORY: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/image2
+
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-      - uses: actions/checkout@v2
-      - name: Hello world action step
-        id: hello
-        uses: ./.github/actions/qa-tests
+      - name: Checkout
+        uses: actions/checkout@v3.1.0
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
         with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build and push images to GitHub Container Registry
+        uses: docker/bake-action@v2.3.0
+        with:
+          files: docker-compose.yml
+          push: true
+          set: |
+            *.platform=linux/amd64
+            image1.cache-from=ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry
+            image1.cache-to=mode=max,ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry
+            image1.pull=true
+            image1.tags=${{ env.IMAGE_1_REPOSITORY }}:tester
+            image2.cache-from=ref=${{ env.IMAGE_2_REPOSITORY }}:cache,type=registry
+            image2.cache-to=mode=max,ref=${{ env.IMAGE_2_REPOSITORY }}:cache,type=registry
+            image2.pull=true
+            image2.tags=${{ env.IMAGE_2_REPOSITORY }}:tester
+          targets: image1,image2

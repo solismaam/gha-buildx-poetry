@@ -51,13 +51,12 @@ jobs:
             image2.pull=true
             image2.tags=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}:${{ inputs.image_tag }}
           targets: image1,image2
-      - if: ${{ inputs.image_tag == 'tester'}}
-        id: cached-poetry-and-venv
+      - id: cached-poetry-venv
         uses: actions/cache@v3
         with:
           path: .venv
           key: ${{ steps.vars.outputs.cache_name }}
-      - if: ${{ inputs.image_tag == 'test'}}
+      - if: ${{ inputs.image_tag != 'release'}}
         env:
           IMAGE_TAG: ${{ inputs.image_tag }}
           IMAGE_1_REPOSITORY: ${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}
@@ -67,9 +66,7 @@ jobs:
             --rm \
             --volume ${PWD}:/home/${{ steps.vars.outputs.user_name }}/app \
             --workdir /home/${{ steps.vars.outputs.user_name }}/app \
-            image1
-
-        
+            image1        
       # - name: Prune Gunicorn untagged images from GHCR
       #   continue-on-error: true
       #   uses: vlaurin/action-ghcr-prune@v0.4.0

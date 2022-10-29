@@ -6,7 +6,7 @@ ARG USER_UID=1000
 ARG USER_GID=1000
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt update \
-    && apt install --assume-yes --quiet curl gdal-bin \
+    && apt install --assume-yes --quiet gdal-bin \
     && apt --assume-yes --quiet autoremove \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
@@ -22,6 +22,12 @@ RUN mkdir ${APP}
 WORKDIR ${APP}
 
 FROM app as app_build
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt update \
+    && apt install --assume-yes --quiet curl git \
+    && apt --assume-yes --quiet autoremove \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
 RUN curl -sSL https://install.python-poetry.org | python3 -
 RUN poetry config virtualenvs.in-project true
 COPY --chown=${USER}:${USER} . ${APP}

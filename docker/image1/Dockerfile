@@ -38,6 +38,8 @@ RUN poetry build
 
 FROM app_build AS app_publish
 
+COPY docker/image1/app_publish.sh ${HOME}/.local/bin/
+
 CMD ["app_publish.sh"]
 
 FROM app AS app_release
@@ -46,7 +48,7 @@ COPY --from=app_builder ${APP}/dist ${APP}/dist
 
 FROM app_build AS app_test
 
-COPY docker/image1/app_tester.sh ${HOME}/.local/bin/
+COPY docker/image1/app_test.sh ${HOME}/.local/bin/
 
 CMD ["app_test.sh"]
 

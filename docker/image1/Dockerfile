@@ -44,7 +44,7 @@ CMD ["app_publish.sh"]
 
 FROM app AS app_release
 
-COPY --from=app_builder ${APP}/dist ${APP}/dist
+COPY --from=app_build ${APP}/dist ${APP}/dist
 
 FROM app_build AS app_test
 

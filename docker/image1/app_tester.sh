@@ -2,4 +2,4 @@
 
 echo "Running tester..."
 poetry install --with test
-poetry shell pytest
+.venv/bin/pytest

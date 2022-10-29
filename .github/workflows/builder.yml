@@ -11,9 +11,9 @@ jobs:
     concurrency: Builder
     runs-on: ubuntu-latest
     steps:
-      - id: vars
+      - name: Prepare builder vars
+        id: vars
         run: |
-          make --version
           echo cache_name=$(git describe --tags --abbrev=0 || echo HEAD) >> $GITHUB_OUTPUT
           echo image_1_container=${{ github.event.repository.name }}/image1 >> $GITHUB_OUTPUT
           echo image_2_container=${{ github.event.repository.name }}/image2 >> $GITHUB_OUTPUT
@@ -53,29 +53,21 @@ jobs:
             image2.pull=true
             image2.tags=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_2_container }}:${{ inputs.image_tag }}
           targets: image1,image2
-      - if: ${{ inputs.image_tag != 'release'}}
-        id: cached-poetry-venv
+      - name: Load cache
+        if: ${{ inputs.image_tag != 'release'}}
         uses: actions/cache@v3
         with:
           path: .venv
           key: ${{ steps.vars.outputs.cache_name }}
-      - if: ${{ inputs.image_tag != 'release'}}
+      - name: Run app
         env:
           IMAGE_TAG: ${{ inputs.image_tag }}
           IMAGE_1_REPOSITORY: ${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}
           IMAGE_2_REPOSITORY: ${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_2_container }}
+        if: ${{ inputs.image_tag != 'release'}}
         run: |
           docker-compose run \
             --rm \
             --volume ${PWD}:/home/${USER}/app \
             --workdir /home/${USER}/app \
             image1        
-      # - name: Prune Gunicorn untagged images from GHCR
-      #   continue-on-error: true
-      #   uses: vlaurin/action-ghcr-prune@v0.4.0
-      #   with:
-      #     container: ${{ env.IMAGE_1_CONTAINER }}
-      #     dry-run: false # Dry-run first, then change to `false`
-      #     organization: ${{ github.repository_owner }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     untagged: true

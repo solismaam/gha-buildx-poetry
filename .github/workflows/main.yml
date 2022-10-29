@@ -6,6 +6,7 @@ jobs:
     with:
       image_tag: "tester"
   Release:
+    needs: Tester
     uses: ./.github/workflows/builder.yml
     with:
       image_tag: "release"

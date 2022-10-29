@@ -20,9 +20,11 @@ USER ${USER}
 
 ENV USER=${USER}
 ENV HOME="/home/${USER}"
+ENV APP=${HOME}/app
 ENV PATH="${HOME}/.local/bin:$PATH"
 
-WORKDIR /home/${USER}
+RUN mkdir ${APP}
+WORKDIR ${APP}
 
 FROM app as app_builder
 
@@ -30,7 +32,7 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 
 RUN poetry config virtualenvs.in-project true
 
-COPY --chown=${USER}:${USER} . ${HOME}
+COPY --chown=${USER}:${USER} . ${APP}
 
 RUN poetry build
 
@@ -40,7 +42,7 @@ CMD ["app_publisher.sh"]
 
 FROM app AS app_release
 
-COPY --from=app_builder ${HOME}/dist ${HOME}/dist
+COPY --from=app_builder ${APP}/dist ${APP}/dist
 
 FROM app_builder AS app_tester
 

@@ -46,10 +46,10 @@ jobs:
             image1.cache-to=mode=max,ref=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}:cache,type=registry
             image1.pull=true
             image1.tags=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}:${{ inputs.image_tag }}
-            image2.cache-from=ref=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}:cache,type=registry
-            image2.cache-to=mode=max,ref=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}:cache,type=registry
+            image2.cache-from=ref=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_2_container }}:cache,type=registry
+            image2.cache-to=mode=max,ref=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_2_container }}:cache,type=registry
             image2.pull=true
-            image2.tags=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}:${{ inputs.image_tag }}
+            image2.tags=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_2_container }}:${{ inputs.image_tag }}
           targets: image1,image2
       - id: cached-poetry-venv
         uses: actions/cache@v3
@@ -62,6 +62,7 @@ jobs:
           IMAGE_1_REPOSITORY: ${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}
           IMAGE_2_REPOSITORY: ${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_2_container }}
         run: |
+          docker images
           docker-compose run \
             --rm \
             --volume ${PWD}:/home/${{ steps.vars.outputs.user_name }}/app \

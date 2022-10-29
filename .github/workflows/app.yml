@@ -7,8 +7,8 @@ on:
         type: string
 
 jobs:
-  Builder:
-    concurrency: Builder
+  App:
+    concurrency: App
     runs-on: ubuntu-latest
     steps:
       - name: Prepare builder vars

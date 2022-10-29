@@ -13,7 +13,7 @@ jobs:
     steps:
       - id: vars
         run: |
-          echo cache_name=${{ inputs.image_tag }}-$(git describe --tags --abbrev=0 || echo HEAD) >> $GITHUB_OUTPUT
+          echo cache_name=$(git describe --tags --abbrev=0 || echo HEAD) >> $GITHUB_OUTPUT
           echo image_1_container=${{ github.event.repository.name }}/image1 >> $GITHUB_OUTPUT
           echo image_2_container=${{ github.event.repository.name }}/image2 >> $GITHUB_OUTPUT
           echo repository=ghcr.io/${{ github.repository_owner }} >> $GITHUB_OUTPUT

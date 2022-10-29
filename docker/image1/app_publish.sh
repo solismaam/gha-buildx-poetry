@@ -1,4 +1,4 @@
 #!/bin/bash
 
 poetry install --with publish
-ls .venv/bin/
+.venv/bin/semantic-release --version

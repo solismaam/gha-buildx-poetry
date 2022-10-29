@@ -51,7 +51,8 @@ jobs:
             image2.pull=true
             image2.tags=${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_2_container }}:${{ inputs.image_tag }}
           targets: image1,image2
-      - id: cached-poetry-venv
+      - if: ${{ inputs.image_tag != 'release'}}
+        id: cached-poetry-venv
         uses: actions/cache@v3
         with:
           path: .venv

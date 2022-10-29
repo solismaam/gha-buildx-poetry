@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: docker/image1/Dockerfile
+    depends_on:
+      - image2
     image: ${IMAGE_1_REPOSITORY:-image1}:${IMAGE_TAG:-local}
     security_opt:
       - label:disable

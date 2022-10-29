@@ -57,7 +57,7 @@ jobs:
         with:
           path: .venv
           key: ${{ steps.vars.outputs.cache_name }}
-      - if: ${{ inputs.image_tag == 'tester'}}
+      - if: ${{ inputs.image_tag == 'test'}}
         env:
           IMAGE_TAG: ${{ inputs.image_tag }}
           IMAGE_1_REPOSITORY: ${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}

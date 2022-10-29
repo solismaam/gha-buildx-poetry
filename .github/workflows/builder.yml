@@ -65,11 +65,10 @@ jobs:
           IMAGE_1_REPOSITORY: ${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_1_container }}
           IMAGE_2_REPOSITORY: ${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.image_2_container }}
         run: |
-          docker images
           docker-compose run \
             --rm \
-            --volume ${PWD}:/home/${{ steps.vars.outputs.user_name }}/app \
-            --workdir /home/${{ steps.vars.outputs.user_name }}/app \
+            --volume ${PWD}:/home/${USER}/app \
+            --workdir /home/${USER}/app \
             image1        
       # - name: Prune Gunicorn untagged images from GHCR
       #   continue-on-error: true

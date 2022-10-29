@@ -1,10 +1,15 @@
 on:
   workflow_call:
     inputs:
-      build_app_type:
+      image_tag:
         description: Build app type
         required: true
         type: string
+
+env:
+  IMAGE_1_REPOSITORY: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/image1
+  IMAGE_2_REPOSITORY: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/image2
+
 
 jobs:
   Builder:
@@ -33,16 +38,16 @@ jobs:
           load: true
           set: |
             *.platform=linux/amd64
-            image1.args.APP_TYPE=${{ inputs.build_app_type }}
+            image1.args.APP_TYPE=${{ inputs.image_tag }}
             image1.args.USER=${{ steps.user.outputs.name }}
             image1.args.USER_GID=${{ steps.user.outputs.gid }}
             image1.args.USER_UID=${{ steps.user.outputs.uid }}
-            image1.cache-from=ref=${{ env.IMAGE_1_REPOSITORY }}:${{ inputs.build_app_type }},type=registry
-            image1.cache-to=mode=max,ref=${{ env.IMAGE_1_REPOSITORY }}:${{ inputs.build_app_type }},type=registry
+            image1.cache-from=ref=${{ env.IMAGE_1_REPOSITORY }}:${{ inputs.image_tag }},type=registry
+            image1.cache-to=mode=max,ref=${{ env.IMAGE_1_REPOSITORY }}:${{ inputs.image_tag }},type=registry
             image1.pull=true
             image1.tags=${{ env.IMAGE_1_REPOSITORY }}:${{ env.IMAGE_TAG }}
-            image2.cache-from=ref=${{ env.IMAGE_2_REPOSITORY }}:${{ inputs.build_app_type }},type=registry
-            image2.cache-to=mode=max,ref=${{ env.IMAGE_2_REPOSITORY }}:${{ inputs.build_app_type }},type=registry
+            image2.cache-from=ref=${{ env.IMAGE_2_REPOSITORY }}:${{ inputs.image_tag }},type=registry
+            image2.cache-to=mode=max,ref=${{ env.IMAGE_2_REPOSITORY }}:${{ inputs.image_tag }},type=registry
             image2.pull=true
             image2.tags=${{ env.IMAGE_2_REPOSITORY }}:${{ env.IMAGE_TAG }}
           targets: image1,image2

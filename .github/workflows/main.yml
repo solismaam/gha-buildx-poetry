@@ -1,15 +1,10 @@
 on: [push]
 
-env:
-  IMAGE_TAG: tester
-  IMAGE_1_REPOSITORY: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/image1
-  IMAGE_2_REPOSITORY: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/image2
-
 jobs:
   Pre-release:
     uses: ./.github/workflows/builder.yml
     with:
-      build_app_type: "tester"
+      image_tag: "tester"
       # - id: user
       #   run: |
       #     echo name=$(whoami) >> $GITHUB_OUTPUT

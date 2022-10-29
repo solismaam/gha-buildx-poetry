@@ -12,6 +12,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && rm -rf /var/lib/apt/lists/*
 RUN addgroup --gid ${USER_GID} ${USER}
 RUN adduser --disabled-password --gecos Runner --gid ${USER_GID} --shell /bin/bash --uid ${USER_UID} $USER
+
 USER ${USER}
 ENV USER=${USER}
 ENV HOME="/home/${USER}"
@@ -22,12 +23,14 @@ RUN mkdir ${APP}
 WORKDIR ${APP}
 
 FROM app as app_build
+USER root
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt update \
     && apt install --assume-yes --quiet curl git \
     && apt --assume-yes --quiet autoremove \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
+USER ${USER}
 RUN curl -sSL https://install.python-poetry.org | python3 -
 RUN poetry config virtualenvs.in-project true
 COPY --chown=${USER}:${USER} . ${APP}

@@ -7,10 +7,9 @@ env:
 
 jobs:
   Pre-release:
-    uses: ./.github/reusables/builder.yml
+    uses: ./.github/workflows/builder.yml@{GITHUB_HEAD_REF}
     with:
-      ref: ${{ github.ref }}
-      release: false
+      build_app_type: "tester"
       # - id: user
       #   run: |
       #     echo name=$(whoami) >> $GITHUB_OUTPUT

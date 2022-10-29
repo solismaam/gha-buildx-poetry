@@ -42,15 +42,11 @@ jobs:
             image1.args.USER=${{ steps.user.outputs.name }}
             image1.args.USER_GID=${{ steps.user.outputs.gid }}
             image1.args.USER_UID=${{ steps.user.outputs.uid }}
-            image1.cache-from=ref=${{ env.IMAGE_1_REPOSITORY }}:builder-cache,type=registry
             image1.cache-from=ref=${{ env.IMAGE_1_REPOSITORY }}:${{ inputs.image_tag }}-cache,type=registry
-            image1.cache-to=mode=max,ref=${{ env.IMAGE_1_REPOSITORY }}:builder-cache,type=registry
             image1.cache-to=mode=max,ref=${{ env.IMAGE_1_REPOSITORY }}:${{ inputs.image_tag }}-cache,type=registry
             image1.pull=true
             image1.tags=${{ env.IMAGE_1_REPOSITORY }}:${{ inputs.image_tag }}
-            image2.cache-from=ref=${{ env.IMAGE_2_REPOSITORY }}:builder-cache,type=registry
             image2.cache-from=ref=${{ env.IMAGE_2_REPOSITORY }}:${{ inputs.image_tag }}-cache,type=registry
-            image2.cache-to=mode=max,ref=${{ env.IMAGE_2_REPOSITORY }}:builder-cache,type=registry
             image2.cache-to=mode=max,ref=${{ env.IMAGE_2_REPOSITORY }}:${{ inputs.image_tag }}-cache,type=registry
             image2.pull=true
             image2.tags=${{ env.IMAGE_2_REPOSITORY }}:${{ inputs.image_tag }}

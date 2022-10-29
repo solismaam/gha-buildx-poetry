@@ -32,6 +32,9 @@ aws-cdk-lib = "^2.47.0"
 constructs = "^10.1.138"
 
 
+[tool.poetry.group.publish.dependencies]
+python-semantic-release = "^7.32.2"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

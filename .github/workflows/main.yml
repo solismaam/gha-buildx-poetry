@@ -6,54 +6,55 @@ env:
   IMAGE_2_REPOSITORY: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/image2
 
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-latest
-    name: A job to say hello
-    steps:
-      - id: user
-        run: |
-          echo name=$(whoami) >> $GITHUB_OUTPUT
-          echo gid=$(id -g) >> $GITHUB_OUTPUT
-          echo uid=$(id -u) >> $GITHUB_OUTPUT
-      - name: Checkout
-        uses: actions/checkout@v3.1.0
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Build and push images to GitHub Container Registry
-        uses: docker/bake-action@v2.3.0
-        with:
-          files: docker-compose.yml
-          load: true
-          set: |
-            *.platform=linux/amd64
-            image1.args.USER=${{ steps.user.outputs.name }}
-            image1.args.USER_GID=${{ steps.user.outputs.gid }}
-            image1.args.USER_UID=${{ steps.user.outputs.uid }}
-            image1.cache-from=ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry
-            image1.cache-to=mode=max,ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry
-            image1.pull=true
-            image1.tags=${{ env.IMAGE_1_REPOSITORY }}:${{ env.IMAGE_TAG }}
-            image2.cache-from=ref=${{ env.IMAGE_2_REPOSITORY }}:cache,type=registry
-            image2.cache-to=mode=max,ref=${{ env.IMAGE_2_REPOSITORY }}:cache,type=registry
-            image2.pull=true
-            image2.tags=${{ env.IMAGE_2_REPOSITORY }}:${{ env.IMAGE_TAG }}
-          targets: image1,image2
-      - run: |
-          docker images
-      - id: tag
-        run: |
-          echo latest="$(git describe --tags --abbrev=0 || echo HEAD)" >> $GITHUB_OUTPUT
-      - name: Load cached poetry and venv
-        id: cached-poetry-and-venv
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: ${{ steps.tag.outputs.latest }}
-      - run: |
-          docker-compose run --rm --volume ${PWD}:/home/${{ steps.user.outputs.name }}/app  --workdir /home/${{ steps.user.outputs.name }}/app image1 poetry install
+  Pre-release:
+    uses: ./.github/reusables/builder.yml
+    with:
+      ref: ${{ github.ref }}
+      release: false
+      # - id: user
+      #   run: |
+      #     echo name=$(whoami) >> $GITHUB_OUTPUT
+      #     echo gid=$(id -g) >> $GITHUB_OUTPUT
+      #     echo uid=$(id -u) >> $GITHUB_OUTPUT
+      # - name: Checkout
+      #   uses: actions/checkout@v3.1.0
+      # - name: Login to GitHub Container Registry
+      #   uses: docker/login-action@v2
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v2
+      # - name: Build and push images to GitHub Container Registry
+      #   uses: docker/bake-action@v2.3.0
+      #   with:
+      #     files: docker-compose.yml
+      #     load: true
+      #     set: |
+      #       *.platform=linux/amd64
+      #       image1.args.USER=${{ steps.user.outputs.name }}
+      #       image1.args.USER_GID=${{ steps.user.outputs.gid }}
+      #       image1.args.USER_UID=${{ steps.user.outputs.uid }}
+      #       image1.cache-from=ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry
+      #       image1.cache-to=mode=max,ref=${{ env.IMAGE_1_REPOSITORY }}:cache,type=registry
+      #       image1.pull=true
+      #       image1.tags=${{ env.IMAGE_1_REPOSITORY }}:${{ env.IMAGE_TAG }}
+      #       image2.cache-from=ref=${{ env.IMAGE_2_REPOSITORY }}:cache,type=registry
+      #       image2.cache-to=mode=max,ref=${{ env.IMAGE_2_REPOSITORY }}:cache,type=registry
+      #       image2.pull=true
+      #       image2.tags=${{ env.IMAGE_2_REPOSITORY }}:${{ env.IMAGE_TAG }}
+      #     targets: image1,image2
+      # - run: |
+      #     docker images
+      # - id: tag
+      #   run: |
+      #     echo latest="$(git describe --tags --abbrev=0 || echo HEAD)" >> $GITHUB_OUTPUT
+      # - name: Load cached poetry and venv
+      #   id: cached-poetry-and-venv
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: .venv
+      #     key: ${{ steps.tag.outputs.latest }}
+      # - run: |
+      #     docker-compose run --rm --volume ${PWD}:/home/${{ steps.user.outputs.name }}/app  --workdir /home/${{ steps.user.outputs.name }}/app image1 poetry install

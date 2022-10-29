@@ -7,7 +7,7 @@ env:
 
 jobs:
   Pre-release:
-    uses: ./.github/workflows/builder.yml@{GITHUB_HEAD_REF}
+    uses: ./.github/workflows/builder.yml
     with:
       build_app_type: "tester"
       # - id: user

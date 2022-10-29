@@ -1,15 +1,21 @@
 on: [push]
 
 jobs:
-  Tester:
+  Test:
     uses: ./.github/workflows/builder.yml
     with:
-      image_tag: "tester"
+      image_tag: "test"
   Release:
     needs: Tester
     uses: ./.github/workflows/builder.yml
     with:
       image_tag: "release"
+  Publish:
+    needs: Release
+    uses: ./.github/workflows/builder.yml
+    with:
+      image_tag: "publish"
+
       # - id: user
       #   run: |
       #     echo name=$(whoami) >> $GITHUB_OUTPUT

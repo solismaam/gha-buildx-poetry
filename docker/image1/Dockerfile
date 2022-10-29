@@ -26,7 +26,7 @@ ENV PATH="${HOME}/.local/bin:$PATH"
 RUN mkdir ${APP}
 WORKDIR ${APP}
 
-FROM app as app_builder
+FROM app as app_build
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
@@ -36,18 +36,18 @@ COPY --chown=${USER}:${USER} . ${APP}
 
 RUN poetry build
 
-FROM app_builder AS app_publisher
+FROM app_build AS app_publish
 
-CMD ["app_publisher.sh"]
+CMD ["app_publish.sh"]
 
 FROM app AS app_release
 
 COPY --from=app_builder ${APP}/dist ${APP}/dist
 
-FROM app_builder AS app_tester
+FROM app_build AS app_test
 
 COPY docker/image1/app_tester.sh ${HOME}/.local/bin/
 
-CMD ["app_tester.sh"]
+CMD ["app_test.sh"]
 
 FROM app_${APP_TYPE} as app_final

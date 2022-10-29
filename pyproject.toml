@@ -9,7 +9,6 @@ readme = "README.md"
 python = "^3.9"
 Django = "^4.1.2"
 boto3 = "^1.24.96"
-boto3-stubs = {extras = ["ecr", "s3", "secretsmanager"], version = "^1.24.96"}
 cryptography = "^38.0.1"
 django-cors-headers = "^3.12.0"
 django-filter = "^22.1"
@@ -28,9 +27,13 @@ requests = "^2.28.1"
 Shapely = "^1.8.5"
 tqdm = "^4.64.1"
 uvicorn = "^0.19.0"
+
+[tool.poetry.group.aws.dependencies]
 aws-cdk-lib = "^2.47.0"
 constructs = "^10.1.138"
 
+[tool.poetry.group.dev.dependencies]
+boto3-stubs = {extras = ["ecr", "s3", "secretsmanager"], version = "^1.24.96"}
 
 [tool.poetry.group.publish.dependencies]
 python-semantic-release = "^7.32.2"

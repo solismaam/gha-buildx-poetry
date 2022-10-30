@@ -15,10 +15,10 @@ jobs:
       - name: Prepare builder vars
         id: vars
         run: |
-          echo CACHE_NAME=${{ github.ref_name }}-${{ inputs.image_tag }}-cache >> $GITHUB_OUTPUT
+          echo CACHE_NAME=${GITHUB_REF}-${{ inputs.image_tag }}-cache >> $GITHUB_OUTPUT
           echo CONTAINER_IMAGE_NAME_IMAGE_1=${CONTAINER_IMAGE_NAME_IMAGE_1} >> $GITHUB_OUTPUT
           echo CONTAINER_IMAGE_NAME_IMAGE_2=${CONTAINER_IMAGE_NAME_IMAGE_1} >> $GITHUB_OUTPUT
-          echo CONTAINER_IMAGE_TAG=${{ github.ref_name }}-${{ inputs.image_tag }} >> $GITHUB_OUTPUT
+          echo CONTAINER_IMAGE_TAG=${GITHUB_REF}-${{ inputs.image_tag }} >> $GITHUB_OUTPUT
           echo CONTAINER_REPOSITORY_NAME=${CONTAINER_REPOSITORY_NAME} >> $GITHUB_OUTPUT
           echo CONTAINER_REPOSITORY_NAME_IMAGE_1=${CONTAINER_REPOSITORY_NAME}/${CONTAINER_IMAGE_NAME_IMAGE_1} >> $GITHUB_OUTPUT
           echo CONTAINER_REPOSITORY_NAME_IMAGE_2=${CONTAINER_REPOSITORY_NAME}/${CONTAINER_IMAGE_NAME_IMAGE_2} >> $GITHUB_OUTPUT
@@ -26,9 +26,7 @@ jobs:
           echo CONTAINER_RUNNER_GID=$(test "${{ inputs.image_tag }}" != "release" && id -g || echo 1000) >> $GITHUB_OUTPUT
           echo CONTAINER_RUNNER_UID=$(test "${{ inputs.image_tag }}" != "release" && id -u || echo 1000) >> $GITHUB_OUTPUT
         env:
-          GITHUB_HEAD_REF: ${{ github.event.pull_request.head.ref }}
-          GITHUB_REF_NAME: ${{ github.ref_name }}
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
+          GITHUB_REF: ${{ github.head_ref || github.base_ref }}
           CONTAINER_IMAGE_NAME_IMAGE_1: ${{ github.event.repository.name }}/image1
           CONTAINER_IMAGE_NAME_IMAGE_2: ${{ github.event.repository.name }}/image2
           CONTAINER_REPOSITORY_NAME: ghcr.io/${{ github.repository_owner }}

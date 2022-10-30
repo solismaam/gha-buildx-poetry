@@ -31,6 +31,7 @@ jobs:
           CONTAINER_IMAGE_NAME_IMAGE_2: ${{ github.event.repository.name }}/image2
           CONTAINER_REPOSITORY_NAME: ghcr.io/${{ github.repository_owner }}
           CONTAINER_TAG_REF: ${{ github.head_ref || github.base_ref }}-${{ inputs.image_tag }}
+          JSON_GITHUB: toJSON(github)
 
       - name: Checkout
         uses: actions/checkout@v3.1.0

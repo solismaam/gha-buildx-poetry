@@ -74,7 +74,7 @@ jobs:
           key: ${{ steps.vars.outputs.cache_name }}-${{ hashFiles('poetry.lock') }}
       - name: Run app
         env:
-          IMAGE_TAG: ${{ steps.vars.output.CONTAINER_IMAGE_TAG }}
+          IMAGE_TAG: ${{ steps.vars.outputs.CONTAINER_IMAGE_TAG }}
           IMAGE_1_REPOSITORY: ${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}
           IMAGE_2_REPOSITORY: ${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_2 }}
         if: ${{ inputs.image_tag != 'release'}}

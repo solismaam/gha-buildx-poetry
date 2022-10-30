@@ -54,14 +54,14 @@ jobs:
             image1.args.USER_GID=${{ steps.vars.outputs.CONTAINER_RUNNER_GID }}
             image1.args.USER_UID=${{ steps.vars.outputs.CONTAINER_RUNNER_UID }}
             image1.cache-from=ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}:main-${{ inputs.image_tag }}-cache,type=registry
-            image1.cache-from=ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}${{ steps.vars.outputs.CACHE_NAME }},type=registry
-            image1.cache-to=mode=max,ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}${{ steps.vars.outputs.CACHE_NAME }},type=registry
+            image1.cache-from=ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}:${{ steps.vars.outputs.CACHE_NAME }},type=registry
+            image1.cache-to=mode=max,ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}:${{ steps.vars.outputs.CACHE_NAME }},type=registry
             image1.pull=true
             image1.tags=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}:${{ steps.vars.output.CONTAINER_IMAGE_TAG }}
             
             image2.cache-from=ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_2 }}:main-${{ inputs.image_tag }}-cache,type=registry
-            image2.cache-from=ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_2 }}${{ steps.vars.outputs.CACHE_NAME }},type=registry
-            image2.cache-to=mode=max,ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_2 }}${{ steps.vars.outputs.CACHE_NAME }},type=registry
+            image2.cache-from=ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_2 }}:${{ steps.vars.outputs.CACHE_NAME }},type=registry
+            image2.cache-to=mode=max,ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_2 }}:${{ steps.vars.outputs.CACHE_NAME }},type=registry
             image2.pull=true
             image2.tags=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_2 }}:${{ steps.vars.output.CONTAINER_IMAGE_TAG }}
           targets: image1,image2

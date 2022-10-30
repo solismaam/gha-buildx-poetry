@@ -15,16 +15,18 @@ jobs:
       - name: Prepare builder vars
         id: vars
         run: |
-          echo CACHE_NAME=${CONTAINER_TAG_REF/\//_}-cache >> $GITHUB_OUTPUT
-          echo CONTAINER_IMAGE_NAME_IMAGE_1=${CONTAINER_IMAGE_NAME_IMAGE_1} >> $GITHUB_OUTPUT
-          echo CONTAINER_IMAGE_NAME_IMAGE_2=${CONTAINER_IMAGE_NAME_IMAGE_1} >> $GITHUB_OUTPUT
-          echo CONTAINER_IMAGE_TAG=${CONTAINER_TAG_REF/\//_} >> $GITHUB_OUTPUT
-          echo CONTAINER_REPOSITORY_NAME=${CONTAINER_REPOSITORY_NAME} >> $GITHUB_OUTPUT
-          echo CONTAINER_REPOSITORY_NAME_IMAGE_1=${CONTAINER_REPOSITORY_NAME}/${CONTAINER_IMAGE_NAME_IMAGE_1} >> $GITHUB_OUTPUT
-          echo CONTAINER_REPOSITORY_NAME_IMAGE_2=${CONTAINER_REPOSITORY_NAME}/${CONTAINER_IMAGE_NAME_IMAGE_2} >> $GITHUB_OUTPUT
-          echo CONTAINER_RUNNER=$(whoami) >> $GITHUB_OUTPUT
-          echo CONTAINER_RUNNER_GID=$(test "${{ inputs.image_tag }}" != "release" && id -g || echo 1000) >> $GITHUB_OUTPUT
-          echo CONTAINER_RUNNER_UID=$(test "${{ inputs.image_tag }}" != "release" && id -u || echo 1000) >> $GITHUB_OUTPUT
+          echo "Set GITHUB_OUTPUT..."
+          echo CACHE_NAME=${CONTAINER_TAG_REF/\//_}-cache >> ${GITHUB_OUTPUT}
+          echo CONTAINER_IMAGE_NAME_IMAGE_1=${CONTAINER_IMAGE_NAME_IMAGE_1} >> ${GITHUB_OUTPUT}
+          echo CONTAINER_IMAGE_NAME_IMAGE_2=${CONTAINER_IMAGE_NAME_IMAGE_1} >> ${GITHUB_OUTPUT}
+          echo CONTAINER_IMAGE_TAG=${CONTAINER_TAG_REF/\//_} >> ${GITHUB_OUTPUT}
+          echo CONTAINER_REPOSITORY_NAME=${CONTAINER_REPOSITORY_NAME} >> ${GITHUB_OUTPUT}
+          echo CONTAINER_REPOSITORY_NAME_IMAGE_1=${CONTAINER_REPOSITORY_NAME}/${CONTAINER_IMAGE_NAME_IMAGE_1} >> ${GITHUB_OUTPUT}
+          echo CONTAINER_REPOSITORY_NAME_IMAGE_2=${CONTAINER_REPOSITORY_NAME}/${CONTAINER_IMAGE_NAME_IMAGE_2} >> ${GITHUB_OUTPUT}
+          echo CONTAINER_RUNNER=$(whoami) >> ${GITHUB_OUTPUT}
+          echo CONTAINER_RUNNER_GID=$(test "${{ inputs.image_tag }}" != "release" && id -g || echo 1000) >> ${GITHUB_OUTPUT}
+          echo CONTAINER_RUNNER_UID=$(test "${{ inputs.image_tag }}" != "release" && id -u || echo 1000) >> ${GITHUB_OUTPUT}
+          cat ${GITHUB_OUTPUT}
         env:
           CONTAINER_IMAGE_NAME_IMAGE_1: ${{ github.event.repository.name }}/image1
           CONTAINER_IMAGE_NAME_IMAGE_2: ${{ github.event.repository.name }}/image2

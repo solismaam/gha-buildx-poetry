@@ -79,8 +79,8 @@ jobs:
         run: |
           docker-compose run \
             --rm \
-            --e GITHUB_ACTOR=${{ github.actor }} \
-            --e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
             --volume ${PWD}:/home/${USER}/app \
             --workdir /home/${USER}/app \
+            -e GITHUB_ACTOR=${{ github.actor }} \
+            -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
             image1        

@@ -9,7 +9,6 @@ jobs:
     with:
       image_tag: "test"
   Publish:
-    needs: Release
     uses: ./.github/workflows/gha.yml
     with:
       image_tag: "publish"

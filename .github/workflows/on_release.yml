@@ -4,7 +4,7 @@ on:
       - created
 jobs:
   Release:
-    needs: Test
+    concurrency: Release
     uses: ./.github/workflows/gha.yml
     with:
       image_tag: "release"

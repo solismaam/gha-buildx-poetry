@@ -77,14 +77,14 @@ dev = ["Sphinx (==4.3.2)", "black (==22.3.0)", "build (==0.8.0)", "flake8 (==4.0
 
 [[package]]
 name = "boto3"
-version = "1.25.3"
+version = "1.25.4"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.7"
 
 [package.dependencies]
-botocore = ">=1.28.3,<1.29.0"
+botocore = ">=1.28.4,<1.29.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.6.0,<0.7.0"
 
@@ -93,8 +93,8 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "boto3-stubs"
-version = "1.25.3"
-description = "Type annotations for boto3 1.25.3 generated with mypy-boto3-builder 7.11.10"
+version = "1.25.4"
+description = "Type annotations for boto3 1.25.4 generated with mypy-boto3-builder 7.11.10"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
@@ -431,7 +431,7 @@ xray = ["mypy-boto3-xray (>=1.25.0,<1.26.0)"]
 
 [[package]]
 name = "botocore"
-version = "1.28.3"
+version = "1.28.4"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -447,7 +447,7 @@ crt = ["awscrt (==0.14.0)"]
 
 [[package]]
 name = "botocore-stubs"
-version = "1.28.3"
+version = "1.28.4"
 description = "Type annotations and code completion for botocore"
 category = "dev"
 optional = false
@@ -558,7 +558,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7
 
 [[package]]
 name = "constructs"
-version = "10.1.142"
+version = "10.1.144"
 description = "A programming model for software-defined state"
 category = "dev"
 optional = false
@@ -1563,7 +1563,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "f2594a8b9297c886f0ad0467bb726299ccd6d27e8190dc4de72c381998d346e7"
+content-hash = "aed6227ae2ea461e582c99241b0437d938c719dec564f62fea92ac74ef2748cb"
 
 [metadata.files]
 asgiref = [
@@ -1606,20 +1606,20 @@ bleach = [
     {file = "bleach-5.0.1.tar.gz", hash = "sha256:0d03255c47eb9bd2f26aa9bb7f2107732e7e8fe195ca2f64709fcf3b0a4a085c"},
 ]
 boto3 = [
-    {file = "boto3-1.25.3-py3-none-any.whl", hash = "sha256:2284a107d43f73b6007c7c8b946a8fd6f9baa6c97b5c956edc67d9be864def58"},
-    {file = "boto3-1.25.3.tar.gz", hash = "sha256:7ddc2c5622dd006502d72f9b7b53eaca3da6f699ada4ec57f4ef1db9d2023e2f"},
+    {file = "boto3-1.25.4-py3-none-any.whl", hash = "sha256:4bbfe9540673940f5a3dea505c5469f48708a56fb588640adb8b6ab7d5f425be"},
+    {file = "boto3-1.25.4.tar.gz", hash = "sha256:03e5055d64a596f7a95ed0ca9fda1b67b7aed00d428e4ccef97f2f82b72ec875"},
 ]
 boto3-stubs = [
-    {file = "boto3-stubs-1.25.3.tar.gz", hash = "sha256:c52c8ee3ea3950a80b4617ecf2eafb9479fa00894d09551b9fcfbaaf15b1f0b9"},
-    {file = "boto3_stubs-1.25.3-py3-none-any.whl", hash = "sha256:684cb561fa63b515dc1ecd5e04ca30a2232aa51d1120e177fcad7552bfc58627"},
+    {file = "boto3-stubs-1.25.4.tar.gz", hash = "sha256:4af6d70cba63b4b74d3af4d018ece105d8b9e0dbb0373f119833ad9ac90637f6"},
+    {file = "boto3_stubs-1.25.4-py3-none-any.whl", hash = "sha256:2d1dd16f8bf980e7c1334c82756a108f234d140bf2b93cda679e7bde360a90fc"},
 ]
 botocore = [
-    {file = "botocore-1.28.3-py3-none-any.whl", hash = "sha256:4ea45626d8c5875c12e5767aa637388ce81871162f494eaf7b3888e875de84b7"},
-    {file = "botocore-1.28.3.tar.gz", hash = "sha256:2c2604262e5ab35ea83e9d5cf8be267e7fcdab6c815a432cfe15f23d92ce723d"},
+    {file = "botocore-1.28.4-py3-none-any.whl", hash = "sha256:09387978a75e7108aa15e8d67bfeb7938cce3d7043339c971daf4277dc4db804"},
+    {file = "botocore-1.28.4.tar.gz", hash = "sha256:ade670506c9e837f61d590873a11c5d06ab9a8492b8d5b853d6c4059ecddc03d"},
 ]
 botocore-stubs = [
-    {file = "botocore_stubs-1.28.3-py3-none-any.whl", hash = "sha256:adeb7b8a1ff3f796a2f4e5bd8e4c9d391438ba5194f99d27b7ff347908f93283"},
-    {file = "botocore_stubs-1.28.3.tar.gz", hash = "sha256:84c1cacd735f1bf16a3cb96cbf89f3e5fe571ad8e01505747b77a5b6b000d096"},
+    {file = "botocore_stubs-1.28.4-py3-none-any.whl", hash = "sha256:830b876ca9ef0a0bbe3b979f50c15d0f33e410ca3114dceaf30ceb88ffb15130"},
+    {file = "botocore_stubs-1.28.4.tar.gz", hash = "sha256:9720d8b27fd07868ce1718a093b02f6734e28c6b7d714ecef6fdfa6af026dbb8"},
 ]
 cattrs = [
     {file = "cattrs-22.2.0-py3-none-any.whl", hash = "sha256:bc12b1f0d000b9f9bee83335887d532a1d3e99a833d1bf0882151c97d3e68c21"},
@@ -1720,8 +1720,8 @@ colorama = [
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
 constructs = [
-    {file = "constructs-10.1.142-py3-none-any.whl", hash = "sha256:88a2afe10474ec4266620f9cdb3112e5213d81958599a681377d1832968e4d52"},
-    {file = "constructs-10.1.142.tar.gz", hash = "sha256:81738c7225b0407fd9c89d5d221c86b6b90ca87d8c53096dc2898cf83901be64"},
+    {file = "constructs-10.1.144-py3-none-any.whl", hash = "sha256:90cd76b087043fcc27f01b551ef4413bc5e416a7d79754ea6ad3d78173b81a1d"},
+    {file = "constructs-10.1.144.tar.gz", hash = "sha256:4a1df8da897a1b16df045038fa98fd8872724569ba6d43439df436cc4c83d457"},
 ]
 cryptography = [
     {file = "cryptography-38.0.1-cp36-abi3-macosx_10_10_universal2.whl", hash = "sha256:10d1f29d6292fc95acb597bacefd5b9e812099d75a6469004fd38ba5471a977f"},

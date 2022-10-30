@@ -1,0 +1,7 @@
+on:
+  pull_request:
+jobs:
+  Test:
+    uses: ./.github/workflows/gha.yml
+    with:
+      image_tag: "test"

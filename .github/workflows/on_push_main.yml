@@ -9,6 +9,7 @@ jobs:
     with:
       image_tag: "test"
   Publish:
+    needs: Test
     uses: ./.github/workflows/gha.yml
     with:
       image_tag: "publish"

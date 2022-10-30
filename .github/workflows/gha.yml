@@ -9,7 +9,6 @@ on:
 
 jobs:
   App:
-    concurrency: App
     runs-on: ubuntu-latest
     steps:
       - name: Prepare builder vars

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-poetry install --with publish
+poetry install --no-root --with publish
 .venv/bin/semantic-release --help

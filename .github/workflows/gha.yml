@@ -15,7 +15,6 @@ jobs:
         id: vars
         run: |
           echo "Set GITHUB_OUTPUT..."
-
           echo CONTAINER_IMAGE_NAME_IMAGE_1=${CONTAINER_IMAGE_NAME_IMAGE_1} >> ${GITHUB_OUTPUT}
           echo CONTAINER_IMAGE_NAME_IMAGE_2=${CONTAINER_IMAGE_NAME_IMAGE_1} >> ${GITHUB_OUTPUT}
           echo CONTAINER_IMAGE_TAG=${CONTAINER_TAG_REF//\//_} >> ${GITHUB_OUTPUT}
@@ -58,8 +57,7 @@ jobs:
             image1.cache-from=ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}:${{ steps.vars.outputs.CONTAINER_IMAGE_TAG }}-cache,type=registry
             image1.cache-to=mode=max,ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}:${{ steps.vars.outputs.CONTAINER_IMAGE_TAG }}-cache,type=registry
             image1.pull=true
-            image1.tags=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}:${{ steps.vars.outputs.CONTAINER_IMAGE_TAG }}
-            
+            image1.tags=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}:${{ steps.vars.outputs.CONTAINER_IMAGE_TAG }}  
             image2.cache-from=ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_2 }}:refs_heads_main-${{ inputs.image_tag }}-cache,type=registry
             image2.cache-from=ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_2 }}:${{ steps.vars.outputs.CONTAINER_IMAGE_TAG }}-cache,type=registry
             image2.cache-to=mode=max,ref=${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_2 }}:${{ steps.vars.outputs.CONTAINER_IMAGE_TAG }}-cache,type=registry

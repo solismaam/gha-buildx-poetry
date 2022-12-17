@@ -1,0 +1,16 @@
+on:
+  workflow_call:
+
+jobs:
+  App:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to AWS
+        run: |
+          echo login
+      - name: Push image to AWS ECR
+        run: |
+          echo push
+      - name: Perform deployment to AWS ECS
+        run: |
+          echo perform

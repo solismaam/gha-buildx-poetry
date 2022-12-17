@@ -1,0 +1,7 @@
+on:
+  pull_request:
+jobs:
+  Test:
+    uses: ./.github/workflows/app.yml
+    with:
+      image_tag: "test"

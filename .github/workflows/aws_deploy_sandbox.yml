@@ -1,7 +1,9 @@
-on: 
-  push:
-    branches:
-      - main
+on:
+  workflow_run:
+    workflows: [Run Tests]
+    types:
+      - completed
+
 jobs:
   Deploy:
     uses: ./.github/workflows/aws_deploy.yml

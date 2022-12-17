@@ -1,0 +1,17 @@
+on:
+  release:
+    types:
+      - published
+jobs:
+  Deploy:
+    name: Deploy to staging environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push image to AWS ECR
+        id: vars
+        run: |
+          echo GO
+      - name: Perform deployment to AWS ECS
+        id: vars
+        run: |
+          echo GO

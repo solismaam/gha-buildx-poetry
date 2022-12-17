@@ -1,7 +1,12 @@
+name: Deploy to Staging
+
 on:
   release:
     types:
       - published
+
+concurrency: Deploy to Staging
+
 jobs:
   Deploy:
     uses: ./.github/workflows/aws_deploy.yml

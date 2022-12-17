@@ -1,8 +1,11 @@
+name: Deploy to Sandbox
 on:
   workflow_run:
     workflows: [Run Tests]
     types:
       - completed
+
+concurrency: Deploy to Sandbox
 
 jobs:
   Deploy:

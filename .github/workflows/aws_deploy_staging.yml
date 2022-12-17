@@ -2,7 +2,6 @@ on:
   release:
     types:
       - published
-
 jobs:
   Deploy:
-    uses: ./.github/workflows/aws_deployment.yml
+    uses: ./.github/workflows/aws_deploy.yml

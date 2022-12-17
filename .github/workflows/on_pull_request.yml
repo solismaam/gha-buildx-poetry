@@ -2,6 +2,6 @@ on:
   pull_request:
 jobs:
   Test:
-    uses: ./.github/workflows/gha.yml
+    uses: ./.github/workflows/app_run.yml
     with:
       image_tag: "test"

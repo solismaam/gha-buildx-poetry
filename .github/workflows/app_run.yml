@@ -70,7 +70,7 @@ jobs:
         with:
           path: .venv
           key: ${{ inputs.image_tag }}-${{ hashFiles('poetry.lock') }}
-      - name: Run app
+      - name: Run app command
         env:
           IMAGE_TAG: ${{ steps.vars.outputs.CONTAINER_IMAGE_TAG }}
           IMAGE_1_REPOSITORY: ${{ steps.vars.outputs.CONTAINER_REPOSITORY_NAME_IMAGE_1 }}

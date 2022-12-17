@@ -11,3 +11,9 @@ jobs:
     uses: ./.github/workflows/app_run.yml
     with:
       image_tag: "test"
+  Build:
+    needs: Test
+    uses: ./.github/workflows/app_run.yml
+    with:
+      image_tag: "release"
+

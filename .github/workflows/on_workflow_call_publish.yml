@@ -1,0 +1,9 @@
+on:
+  workflow_call:
+
+jobs:
+  Publish:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/app_run.yml
+    with:
+      image_tag: "publish"

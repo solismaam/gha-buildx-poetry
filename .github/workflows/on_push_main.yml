@@ -6,9 +6,7 @@ on:
 
     
 jobs:
-  Some:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Demo
-        run: |
-          echo login
+  Test:
+    uses: ./.github/workflows/app_run.yml
+    with:
+      image_tag: "test"

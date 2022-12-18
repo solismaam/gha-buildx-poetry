@@ -3,7 +3,8 @@ name: Deploy to Staging
 on:
   release:
     types:
-      - published
+      - 
+  workflow_dispatch:
 
 concurrency: Deploy to Staging
 

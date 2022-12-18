@@ -32,5 +32,5 @@ jobs:
           dry-run: false
           organization: ${{ github.repository_owner }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag-regex: ^${{ github.ref }}-.*$
+          # tag-regex: ^${{ github.ref }}-.*$
 

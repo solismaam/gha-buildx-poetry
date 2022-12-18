@@ -1,7 +1,8 @@
 name: Deploy to Sandbox
+
 on:
   workflow_run:
-    workflows: [Run Tests]
+    workflows: [On push to main]
     types:
       - completed
 

@@ -30,7 +30,7 @@ jobs:
         with:
           container: ${{ steps.gather-vars.outputs.container }}
           dry-run: true
-          older-than: 7
+          # older-than: 7
           organization: ${{ github.repository_owner }}
           token: ${{ secrets.GITHUB_TOKEN }}
           tag-regex: ^${{ github.ref }}-.*$

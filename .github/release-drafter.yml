@@ -17,3 +17,7 @@ categories:
       - 'chore'
       - 'refactor'
       - 'style'
+template: |
+  ## Changes
+
+  $CHANGES

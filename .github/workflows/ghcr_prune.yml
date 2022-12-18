@@ -31,4 +31,5 @@ jobs:
           organization: ${{ github.repository_owner }}
           token: ${{ secrets.TOKEN_FOR_PACKAGES_DELETE }}
           untagged: true
+          tag-regex: ^.*$
 

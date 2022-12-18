@@ -1,4 +1,4 @@
-name: Prune images 
+name: Reusable GHCR maintenance workflow
 
 on:
   workflow_call:

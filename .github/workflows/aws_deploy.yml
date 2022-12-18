@@ -1,4 +1,5 @@
 name: Reusable AWS deployment workflow
+
 on:
   workflow_call:
 

@@ -5,6 +5,8 @@ on:
     - cron: "0 0 * * *"
   workflow_dispatch:
 
+permissions:
+  packages: write
 
 jobs:
   Prune:
@@ -22,14 +24,6 @@ jobs:
         run: |
           echo container=$(echo '${{ github.repository }}' | cut -f2 -d '/')/${{ matrix.name }} >> $GITHUB_OUTPUT
 
-      - name: Prune untagged images from GHCR
-        continue-on-error: true
-        uses: vlaurin/action-ghcr-prune@v0.4.0
-        with:
-          container: ${{ steps.gather-vars.outputs.container }}
-          dry-run: true
-          untagged: true
-
       - name: Prune tagged images from GHCR
         continue-on-error: true
         uses: vlaurin/action-ghcr-prune@v0.4.0
@@ -37,5 +31,6 @@ jobs:
           container: ${{ steps.gather-vars.outputs.container }}
           dry-run: true
           older-than: 7
-          tag-regex: ^.*$
+          organization: ${{ github.repository_owner }}
+          tag-regex: ^${CONTAINER_TAG_REF//\//_}$
 

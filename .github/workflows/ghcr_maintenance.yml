@@ -1,9 +1,15 @@
 name: GHCR maintenance
 
+
 on:
-  push:
-    
-  workflow_call:
+  pull_request:
+    types:
+      - closed
+  workflow_run:
+    workflows: [On push to main]
+    types:
+      - completed
+
 
 permissions:
   contents: write

@@ -6,7 +6,6 @@ on:
 
 jobs:
   Test:
-    if: ${{ github.actor == 'dependabot[bot]'}}
     uses: ./.github/workflows/app_run.yml
     with:
       image_tag: "test"

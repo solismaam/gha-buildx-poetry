@@ -1,15 +1,7 @@
-name: GHCR maintenance
-
+name: Prune images 
 
 on:
-  pull_request:
-    types:
-      - closed
-  workflow_run:
-    workflows: [On push to main]
-    types:
-      - completed
-
+  workflow_call:
 
 permissions:
   contents: write

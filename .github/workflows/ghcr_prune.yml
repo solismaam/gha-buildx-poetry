@@ -24,7 +24,7 @@ jobs:
           container: ${{ steps.gather-vars.outputs.container }}
           dry-run: false
           organization: ${{ github.repository_owner }}
-          token: ${{ secrets.TOKEN_FOR_PACKAGES_DELETE }}
+          token: ${{ secrets.GITHUB_ACTION_TOKEN_FOR_PACKAGES_DELETE }}
           untagged: true
           keep-last: 0
           older-than: 0

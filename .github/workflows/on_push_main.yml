@@ -15,6 +15,7 @@ jobs:
     with:
       image_tag: "release"
   Draft:
+    needs: Build
     permissions:
       contents: write
     runs-on: ubuntu-latest

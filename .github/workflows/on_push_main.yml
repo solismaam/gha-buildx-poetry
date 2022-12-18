@@ -14,3 +14,11 @@ jobs:
     uses: ./.github/workflows/app_run.yml
     with:
       image_tag: "release"
+  Draft:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

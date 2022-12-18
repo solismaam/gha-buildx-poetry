@@ -27,7 +27,5 @@ jobs:
           dry-run: false
           organization: ${{ github.repository_owner }}
           token: ${{ secrets.TOKEN_FOR_PACKAGES_DELETE }}
-          keep-last: 3
-          older-than: 0
-          tag-regex: ^.*$
+          untagged: true
 

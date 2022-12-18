@@ -1,3 +1,5 @@
+name: Reusable application workflow
+
 on:
   workflow_call:
     inputs:

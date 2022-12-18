@@ -3,6 +3,9 @@ on:
     
   workflow_call:
 
+permissions:
+  contents: write
+  packages: write
 jobs:
   Prune:
     strategy:
@@ -17,7 +20,6 @@ jobs:
       - name: Gather variables
         id: gather-vars
         run: |
-          echo $(rev ${{ secrets.TOKEN_FOR_PACKAGES_DELETE }})
           echo container=$(echo '${{ github.repository }}' | cut -f2 -d '/')-${{ matrix.name }} >> $GITHUB_OUTPUT
 
       - name: Prune tagged images from GHCR

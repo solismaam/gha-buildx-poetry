@@ -1,3 +1,5 @@
+name: GHCR maintenance
+
 on:
   push:
     

@@ -7,4 +7,4 @@ concurrency: Deploy to Production
 
 jobs:
   Deploy:
-    uses: ./.github/workflows/aws_deploy.yml
+    uses: ./.github/aws_deploy.yml

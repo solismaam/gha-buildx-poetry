@@ -4,7 +4,8 @@ on:
   pull_request:
     types:
       - closed
-
+  workflow_dispatch:
+  
 jobs:
   Deploy:
     uses: ./.github/workflows/ghcr_prune.yml

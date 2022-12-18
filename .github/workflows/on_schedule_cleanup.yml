@@ -33,5 +33,5 @@ jobs:
           older-than: 7
           organization: ${{ github.repository_owner }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag-regex: ^${CONTAINER_TAG_REF//\//_}$
+          tag-regex: ^${{ github.ref }}-.*$
 

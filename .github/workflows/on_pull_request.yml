@@ -1,5 +1,9 @@
+name: On PR change
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
 jobs:
   Test:
     uses: ./.github/workflows/app_run.yml

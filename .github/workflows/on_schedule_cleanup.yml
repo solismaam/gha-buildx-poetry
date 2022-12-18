@@ -32,5 +32,6 @@ jobs:
           dry-run: true
           older-than: 7
           organization: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           tag-regex: ^${CONTAINER_TAG_REF//\//_}$
 

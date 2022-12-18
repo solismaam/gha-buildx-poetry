@@ -1,0 +1,10 @@
+name: On PR closed
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/ghcr_prune.yml

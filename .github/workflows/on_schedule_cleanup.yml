@@ -31,6 +31,6 @@ jobs:
           container: ${{ steps.gather-vars.outputs.container }}
           dry-run: false
           organization: ${{ github.repository_owner }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN_FOR_PACKAGES_DELETE }}
           # tag-regex: ^${{ github.ref }}-.*$
 

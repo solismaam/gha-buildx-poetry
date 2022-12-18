@@ -8,4 +8,4 @@ on:
   
 jobs:
   Deploy:
-    uses: ./.github/workflows/ghcr_prune.yml
+    uses: ./.github/workflows/ghcr_maintenance.yml

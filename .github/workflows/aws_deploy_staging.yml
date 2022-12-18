@@ -9,4 +9,4 @@ concurrency: Deploy to Staging
 
 jobs:
   Deploy:
-    uses: ./.github/aws_deploy.yml@main
+    uses: ./.github/workflows/aws_deploy.yml
